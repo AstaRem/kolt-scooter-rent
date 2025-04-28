@@ -1,37 +1,38 @@
 import { useState } from "react"
+import './EditModal.css'
 
-export default function EditModal({scooter, onSave, onClose}) {
+export default function EditModal({ scooter, onSave, onClose }) {
 
-    const [newDate, setNewDate] = useState('');
-    const [rideKm, setRideKm] = useState('');
-    const [busy, setBusy] = useState(scooter.isBusy === 1);
-    
-    function handleSave(){
-        const updated = {...scooter};
-        if(newDate) updated.lastUseTime = new Date(newDate).toISOString();
-        const extraKm = parseFloat(rideKm) || 0;
-        updated.totalRideKilometres = parseFloat(
-            (updated.totalRideKilometres + extraKm).toFixed(2)
-        );
-        updated.isBusy === busy ? 1 : 0;
-        onSave(updated);
-        onClose(); 
-    }
+  const [newDate, setNewDate] = useState('');
+  const [rideKm, setRideKm] = useState('');
+  const [busy, setBusy] = useState(scooter.isBusy === 1);
 
+  function handleSave() {
+    const updated = { ...scooter };
+    if (newDate) updated.lastUseTime = new Date(newDate).toISOString();
+    const extraKm = parseFloat(rideKm) || 0;
+    updated.totalRideKilometers = parseFloat(
+      (updated.totalRideKilometers + extraKm).toFixed(2)
+    );
+    // Correct busy assignment:
+    updated.isBusy = busy ? 1 : 0;
+    onSave(updated);
+    onClose();
+  }
 
   return (
     <div className="modal-backdrop">
       <div className="modal">
-        <h3>Edit scooter {scooter.registrationCode}</h3>
-        <label>Registration Code not editable</label>
-        <input value={scooter.registrationCode} readOnly />
-        <label>Recently used: {new Date(scooter.lastUseTime).toLocaleDateString()}</label>
+        <h3>Edit scooter:</h3>
+        <label><strong>Registration Code</strong></label>
+        <input value={scooter.registrationCode} readOnly className="not-editable-reg" />
+        <label><strong>Recently used: </strong>{new Date(scooter.lastUseTime).toLocaleDateString()}</label>
         <input
           type="date"
           value={newDate}
           onChange={e => setNewDate(e.target.value)}
         />
-        <label>Total km: {scooter.totalRideKilometers.toFixed(2)}</label>
+        <label><strong>Total km:</strong> {scooter.totalRideKilometers.toFixed(2)}</label>
         <input
           type="number"
           step="0.01"
@@ -42,15 +43,16 @@ export default function EditModal({scooter, onSave, onClose}) {
         <label>
           Busy:
           <input
-            type="checkbox" 
+            type="checkbox"
             checked={busy}
             onChange={e => setBusy(e.target.checked)}
           />
         </label>
-        <button onClick={handleSave}>Save</button>
-        <button onClick={onClose}>Cancel</button>
+        <div className="btn-div">
+          <button onClick={handleSave}>Save</button>
+          <button onClick={onClose}>Cancel</button>
+        </div>
       </div>
     </div>
   );
-  
 }
