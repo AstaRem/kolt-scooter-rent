@@ -5,6 +5,7 @@ import EditModal from './Components/EditModal';
 import ScooterList from './Components/ScooterList';
 import { loadAll, saveAll, addScooter, updateScooter, removeScooter} from './storage';
 import Hero from './Components/Hero';
+import Header from './Components/Header';
 
 
 function App() {
@@ -27,25 +28,30 @@ function App() {
 
   return (
     <>
-    <div className="app-container">
-      {
-        editing !== null && (
-          <EditModal 
-            scooter = {scooters.find(s => s.id === editing)}
-            onSave={upd => setScooters(prev => prev.map(s => (s.id === upd.id ? upd : s))
-            )}
-            onClose={() => setEditing(null)}
-          />
+    <div className="app-wrapper">
+    <Header />
+    <Hero />
 
-        )
-      }
-      <Hero />
-      <AddScooterForm onAdd={newS => setScooters(prev => [...prev, newS])} />
-      <ScooterList 
-        scooters={scooters} 
-        onEdit={id => setEditing(id)} 
-        onDelete={id => setScooters(prev => prev.filter(s => s.id !== id))}
-      />
+
+      <div className="app-container">
+        {
+          editing !== null && (
+            <EditModal 
+              scooter = {scooters.find(s => s.id === editing)}
+              onSave={upd => setScooters(prev => prev.map(s => (s.id === upd.id ? upd : s))
+              )}
+              onClose={() => setEditing(null)}
+            />
+
+          )
+        }
+        <AddScooterForm onAdd={newS => setScooters(prev => [...prev, newS])} />
+        <ScooterList 
+          scooters={scooters} 
+          onEdit={id => setEditing(id)} 
+          onDelete={id => setScooters(prev => prev.filter(s => s.id !== id))}
+        />
+      </div>
     </div>
     </>
   );

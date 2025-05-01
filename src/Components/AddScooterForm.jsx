@@ -29,30 +29,47 @@ export default function AddScooterForm({ onAdd }) {
   }
 
   return (
-    <form className="add-form" onSubmit={handleSubmit}>
+    <div className="add-form-wrapper">
       <h3>Add New Scooter</h3>
-      <div>
-        <label>Registration Code:</label>
-        <input type="text" value={registrationCode} readOnly />
-      </div>
-      <div>
-        <label>Last used time:</label>
-        <input 
-          type="date" 
-          value={lastUseTime} 
-          onChange={e => setLastUseTime(e.target.value)} 
-        />
-      </div>
-      <div>
-        <label>Total ride km:</label>
-        <input 
-          type="number" 
-          step="0.01" 
-          value={totalRideKilometers} 
-          onChange={e => setTotalRideKilometers(e.target.value)} 
-        />
-      </div>
-      <button type="submit" className="blue-btn">Add</button>
-    </form>
+
+      <form className="add-form" onSubmit={handleSubmit}>
+        <div>
+          <label >Registration Code:</label>
+          <input 
+            type="text" 
+            value={registrationCode} 
+            readOnly 
+            className="input-registration add-input"/>
+        </div>
+        <div>
+          <label>Last used time:</label>
+          <input 
+            type="date" 
+            value={lastUseTime} 
+            onChange={e => setLastUseTime(e.target.value)} 
+            className="add-input"
+          />
+        </div>
+        <div>
+          <label>Total ride km:</label>
+          <input 
+            type="number" 
+            step="0.01" 
+            value={totalRideKilometers} 
+            onChange={e => setTotalRideKilometers(e.target.value)} 
+            className="add-input"
+          />
+        </div>
+
+        <div className="btn-div-list">
+          <button type="submit" className="blue-btn">Add</button>
+        </div>
+
+      </form>
+
+
+    </div>
+
+
   );
 }

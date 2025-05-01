@@ -1,5 +1,5 @@
 .list{
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -10,14 +10,15 @@
     justify-content: space-between;
     align-items: center;
     /* border: 1px solid black; */
-    padding: 20px 30px;
+    padding: 0 30px;
     background-color: var(--white);
     border-radius: 7px;
     margin: 10px auto;
 }
 
 .scooter-img {
-    width: 25%;
+    width: 20%;
+    padding: 20px;
 }
 
 .scooter-img img {

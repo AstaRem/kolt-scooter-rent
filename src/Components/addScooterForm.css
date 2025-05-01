@@ -1,9 +1,19 @@
-.add-form {
+.add-form-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     background: var(--white);
     border-radius: 7px;
-    padding: 30px;
+    padding: 20px 30px 30px 30px;
 }
 
+.add-form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
 
 .blue-btn  {
     height: 40px;
@@ -22,4 +32,15 @@
     color: var(--white);
     outline: none;
     /* color: var(--white); */
+}
+
+.add-input {
+    border: 1px solid var(--dark-gray);
+    width: 200px;
+    height: 30px;
+    margin-top: 10px;
+}
+
+.input-registration {
+    background-color: var(--light-gray);
 }
