@@ -6,6 +6,7 @@ import ScooterList from './Components/ScooterList';
 import { loadAll, saveAll, addScooter, updateScooter, removeScooter} from './storage';
 import Hero from './Components/Hero';
 import Header from './Components/Header';
+import Statistics from './Components/Statistics';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           )
         }
         <AddScooterForm onAdd={newS => setScooters(prev => [...prev, newS])} />
+        <Statistics scooters={scooters}/>
         <ScooterList 
           scooters={scooters} 
           onEdit={id => setEditing(id)} 
