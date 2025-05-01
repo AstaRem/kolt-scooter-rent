@@ -15,6 +15,10 @@ function App() {
   const [scooters, setScooters] = useState([]);
   const [editing, setEditing] = useState(null) // scooter id or null
 
+  const [sortKmAsc, setSortKmAsc] = useState(true);
+  const [sortDateAsc, setSortDateAsc] = useState(true);
+
+
   //load on mount
   useEffect(() => {
     setScooters(loadAll());
@@ -25,6 +29,25 @@ function App() {
     saveAll(scooters);
   }, [scooters]);
 
+  // handles to so rt by km
+  const handleSortByKm = () => {
+    const sorted = [...scooters].sort((a, b) => sortKmAsc 
+    ? a.totalRideKilometers - b.totalRideKilometers
+    : b.totalRideKilometers - a.totalRideKilometers
+  );
+  setScooters(sorted);
+  setSortKmAsc(!sortKmAsc);
+  }
+
+  const handleSortByDate = () => {
+    const sorted = [...scooters].sort((a, b) => sortDateAsc 
+    ? new Date(a.lastUseTime) - new Date(b.lastUseTime)
+    : new Date(b.lastUseTime) - new Date(a.lastUseTime)
+  );
+  setScooters(sorted);
+  setSortDateAsc(!sortDateAsc);
+
+  }
 
 
   return (
@@ -48,6 +71,14 @@ function App() {
         }
         <AddScooterForm onAdd={newS => setScooters(prev => [...prev, newS])} />
         <Statistics scooters={scooters}/>
+
+        <div className="sorting-btn-container">
+            <button onClick={handleSortByKm}>Sort by Km - {sortKmAsc ? 'ASC' : 'DESC'}</button> 
+            <button onClick={handleSortByDate}>Sort by Last Use Date - {sortDateAsc ? 'ASC' : 'DESC' } </button> 
+        </div>
+
+
+
         <ScooterList 
           scooters={scooters} 
           onEdit={id => setEditing(id)} 

@@ -10,14 +10,17 @@ export default function Statistics({scooters}){
         <div className="statistics-wrapper">
 
             <div className="statistics-container">
+
                 <div className="total-scooters-div">
                     <p>Total scooters:</p>
                     <p>{totalScooters}</p>
                 </div>
+
                 <div className="total-km-div">
                     <p>Total km:</p>
                     <p>{totalKilometers}</p>
                 </div>
+                
             </div>
         </div>
     )
