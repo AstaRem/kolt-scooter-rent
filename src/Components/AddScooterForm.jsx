@@ -1,27 +1,58 @@
+import { useState } from 'react';
+import './addScooterForm.css'
 
-export default function AddScooterForm({onAdd}) {
 
-    function randomNum(min, max) {
-        const minCeiled = Math.ceil(min);
-        const maxFloored = Math.floor(max);
-        return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
-      }
-      
+export default function AddScooterForm({ onAdd }) {
+  // generate registration code only once when the component mounts
+  const [registrationCode] = useState(() => randomNum(1000000, 100000000));
+  // default last used date is today (formatted as YYYY-MM-DD)
+  const [lastUseTime, setLastUseTime] = useState(new Date().toISOString().slice(0, 10));
+  const [totalRideKilometers, setTotalRideKilometers] = useState(0);
 
-    function handleAdd(){
-        onAdd({
-            id: Date.now(), // simple id for now, replace later with uuid or smth. else
-            registrationCode: randomNum(1000000, 100000000),
-            isBusy: 0,
-            lastUseTime: new Date().toISOString(),
-            totalRideKilometers: 0.0,
-        });
-    }
+  function randomNum(min, max) {
+    const minCeiled = Math.ceil(min);
+    const maxFloored = Math.floor(max);
+    return Math.floor(
+      Math.random() * (maxFloored - minCeiled + 1) + minCeiled
+    );
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onAdd({
+      id: Date.now(),
+      registrationCode,
+      isBusy: 0,
+      lastUseTime: new Date(lastUseTime).toISOString(),
+      totalRideKilometers: parseFloat(totalRideKilometers),
+    });
+  }
 
   return (
-    <div className="add-form">
-        <button onClick={handleAdd}>Add New Scooter</button>
-
-    </div>
-  )
+    <form className="add-form" onSubmit={handleSubmit}>
+      <h3>Add New Scooter</h3>
+      <div>
+        <label>Registration Code:</label>
+        <input type="text" value={registrationCode} readOnly />
+      </div>
+      <div>
+        <label>Last used time:</label>
+        <input 
+          type="date" 
+          value={lastUseTime} 
+          onChange={e => setLastUseTime(e.target.value)} 
+        />
+      </div>
+      <div>
+        <label>Total ride km:</label>
+        <input 
+          type="number" 
+          step="0.01" 
+          value={totalRideKilometers} 
+          onChange={e => setTotalRideKilometers(e.target.value)} 
+        />
+      </div>
+      <button type="submit" className="blue-btn">Add</button>
+    </form>
+  );
 }

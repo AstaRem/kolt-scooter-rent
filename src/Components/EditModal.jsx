@@ -49,8 +49,8 @@ export default function EditModal({ scooter, onSave, onClose }) {
           />
         </label>
         <div className="btn-div">
-          <button onClick={handleSave}>Save</button>
-          <button onClick={onClose}>Cancel</button>
+          <button onClick={handleSave} className="green-btn">Save</button>
+          <button onClick={onClose} className="red-btn">Cancel</button>
         </div>
       </div>
     </div>

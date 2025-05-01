@@ -4,6 +4,7 @@ import AddScooterForm from './Components/AddScooterForm';
 import EditModal from './Components/EditModal';
 import ScooterList from './Components/ScooterList';
 import { loadAll, saveAll, addScooter, updateScooter, removeScooter} from './storage';
+import Hero from './Components/Hero';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
 
         )
       }
+      <Hero />
       <AddScooterForm onAdd={newS => setScooters(prev => [...prev, newS])} />
       <ScooterList 
         scooters={scooters} 

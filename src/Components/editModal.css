@@ -13,7 +13,7 @@
 
 .modal {
     background-color: #ffffff; /* White background for the modal */
-    padding: 20px;
+    padding: 20px 50px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.25);
     z-index: 1001; /* Higher than the backdrop */
@@ -21,6 +21,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 5px;
+    
 }
 
 .not-editable-reg {
@@ -31,6 +32,7 @@
 .btn-div {
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 5px;
@@ -41,9 +43,29 @@
     height: 40px;
     font-size: 16px;
     line-height: 16px;
-    background-color: rgb(212, 110, 110);
     padding: 10px 15px;
 }
+
+.btn-div .green-btn {
+    background-color: var(--green);
+}
+
+.btn-div .green-btn:hover{
+    background-color: var(--dark-green);
+    color: var(--white);
+}
+
+
+
+.btn-div .red-btn {
+    background-color: var(--red);
+}
+
+.btn-div .red-btn:hover{
+    background-color: var(--dark-red);
+    color: var(--white);
+}
+
 
 input {
     width: 100%;

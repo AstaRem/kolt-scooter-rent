@@ -1,0 +1,25 @@
+.add-form {
+    background: var(--white);
+    border-radius: 7px;
+    padding: 30px;
+}
+
+
+.blue-btn  {
+    height: 40px;
+    width: 130px;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 10px 15px;
+    background-color: var(--blue);
+    margin-top: 10px;
+
+}
+
+
+.blue-btn:hover{
+    background-color: var(--dark-blue);
+    color: var(--white);
+    outline: none;
+    /* color: var(--white); */
+}
